@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: contact
+    description: Public website contact form
 paths:
   /healthz:
     get:
@@ -24,6 +26,49 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /contact:
+    post:
+      operationId: submitContactInquiry
+      tags: [contact]
+      summary: Submit a HighFly AI project inquiry
+      description: Validates an inquiry and sends it to HighFly AI through the configured transactional email provider.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInquiryInput"
+      responses:
+        "202":
+          description: Inquiry accepted for email delivery
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactInquiryResponse"
+        "400":
+          description: Invalid inquiry or missing consent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "429":
+          description: Too many inquiries from this address
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "502":
+          description: The email provider rejected or could not deliver the inquiry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "503":
+          description: Contact email delivery is not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +78,64 @@ components:
           type: string
       required:
         - status
+    ContactInquiryInput:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        description:
+          type: string
+          minLength: 1
+          maxLength: 4000
+        service:
+          type: string
+          minLength: 1
+          maxLength: 100
+        company:
+          type: string
+          maxLength: 160
+        phone:
+          type: string
+          maxLength: 40
+        budget:
+          type: string
+          maxLength: 80
+        timeline:
+          type: string
+          maxLength: 120
+        notes:
+          type: string
+          maxLength: 4000
+        consent:
+          type: boolean
+        website:
+          type: string
+          maxLength: 200
+      required:
+        - name
+        - email
+        - description
+        - service
+        - consent
+    ContactInquiryResponse:
+      type: object
+      properties:
+        accepted:
+          type: boolean
+      required:
+        - accepted
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
 
