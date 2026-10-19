@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "HighFly AI Official Website"
+description = "The official HighFly AI company website showcasing software development, AI and automation services, verified project work, about information, and a transparent project inquiry contact flow."
+version = "1.0.0"
+id = "artifacts/highfly-ai-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23642
+
+[services.development]
+run = "pnpm --filter @workspace/highfly-ai-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/highfly-ai-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/highfly-ai-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23642"
+BASE_PATH = "/"
