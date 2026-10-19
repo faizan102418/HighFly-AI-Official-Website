@@ -435,6 +435,24 @@ h1,h2,h3,h4 { font-family: 'Manrope', sans-serif; color: var(--navy); letter-spa
 .about-card {padding:25px;border-top:2px solid #2fbab4;background:#fff;}
 .about-card h3 {font-size:18px;margin:0 0 10px;}
 .about-card p {font-size:13px;color:var(--subtle);line-height:1.7;margin:0;}
+.team-section {padding:0 0 100px;}
+.team-heading {max-width:700px;margin-bottom:30px;}
+.team-heading h2 {font-size:clamp(34px,4vw,47px);line-height:1.1;margin:14px 0;}
+.team-heading p {color:var(--subtle);line-height:1.7;margin:0;}
+.team-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+.team-card {overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:6px;}
+.team-photo {aspect-ratio:1/1;background:#eaf4f2;overflow:hidden;}
+.team-photo img {width:100%;height:100%;display:block;object-fit:cover;object-position:center top;}
+.team-avatar {width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:linear-gradient(140deg,#102c53,#1da9aa);color:#fff;}
+.team-avatar span {font:500 48px 'Manrope';}
+.team-avatar small {font:10px 'IBM Plex Mono';letter-spacing:.04em;}
+.team-card-content {padding:18px;}
+.team-card-content h3 {font:600 19px/1.3 'Manrope';margin:0 0 8px;color:#12345a;}
+.team-role {font-size:12px;line-height:1.55;font-weight:700;color:#167d83;margin:0 0 4px;}
+.team-subtitle,.team-bio {font-size:12px;line-height:1.6;color:var(--subtle);margin:0 0 9px;}
+.team-links {display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+.team-links a {padding:6px 8px;border:1px solid #d8e6e4;border-radius:3px;color:#175c68;font-size:10px;font-weight:700;transition:background .2s,color .2s;}
+.team-links a:hover {background:#e5f5f2;color:#0e4450;}
 .contact-section {padding:66px 0 100px;}
 .contact-layout {display:grid;grid-template-columns:.72fr 1.28fr;gap:50px;align-items:start;}
 .contact-copy h2 {font-size:31px;margin:0 0 13px;}
@@ -444,6 +462,12 @@ h1,h2,h3,h4 { font-family: 'Manrope', sans-serif; color: var(--navy); letter-spa
 .contact-details-placeholder {margin-top:20px;padding:16px 18px;background:#f2f8f7;border:1px solid var(--line);}
 .contact-details-placeholder h3 {font-size:14px;margin:0 0 7px;}
 .contact-details-placeholder p {font-size:12px;line-height:1.65;color:var(--subtle);margin:0;}
+.company-contact-methods {display:grid;gap:10px;margin-top:14px;}
+.company-contact-methods a {display:grid;grid-template-columns:92px 1fr;gap:10px;color:#176a70;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
+.company-contact-methods a span {color:#294861;font-weight:700;}
+.footer-contact-links {display:grid;gap:8px;margin-top:14px;font-size:12px;}
+.footer-contact-links a {color:#b8cbd6;overflow-wrap:anywhere;transition:color .2s;}
+.footer-contact-links a:hover {color:#52d0c7;}
 .contact-form {padding:30px;background:#fff;border:1px solid var(--line);border-radius:6px;}
 .form-grid {display:grid;grid-template-columns:1fr 1fr;gap:17px;}
 .field {display:flex;flex-direction:column;gap:7px;}
@@ -471,6 +495,7 @@ h1,h2,h3,h4 { font-family: 'Manrope', sans-serif; color: var(--navy); letter-spa
  .nav-links {gap:17px}.brand-link{flex-basis:155px}.brand-link img{width:155px}
  .industry-grid{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr 0.75fr}.hero-art{min-height:330px}
  .footer-main{grid-template-columns:1.3fr 1fr 1fr;gap:30px}.footer-brand{grid-column:1/-1}
+  .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px) {
  .container{width:min(100% - 36px,560px)}.section{padding:76px 0}
@@ -498,6 +523,7 @@ h1,h2,h3,h4 { font-family: 'Manrope', sans-serif; color: var(--navy); letter-spa
  .cta-actions{flex-direction:column;width:100%}.cta-actions .button{width:100%}
  .footer-main{grid-template-columns:1fr 1fr;gap:14px}.footer-bottom{gap:12px;flex-direction:column}
  .about-cards{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}
+  .team-grid{grid-template-columns:1fr}
  .contact-form{padding:20px 16px}.inner-hero{padding:71px 0}.inner-hero h1{font-size:44px}
  .service-detail-card{grid-template-columns:44px 1fr;padding:21px 17px;gap:13px}
 }

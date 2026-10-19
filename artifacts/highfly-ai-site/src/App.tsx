@@ -25,6 +25,51 @@ const projects: Project[] = [
   { slug:'google-ai-studio-prototype', title:'Google AI Studio app prototype', category:'Artificial Intelligence / Application Prototype', status:'Prototype', filter:'AI', href:'https://ai.studio/apps/4bf20ca4-25f0-4eed-8765-de6070370213', description:'An application prototype created in Google AI Studio. Its specific functionality has not been verified, so no further feature claims are made.', detail:'An application prototype created using Google AI Studio. Its specific functionality could not be verified, so this listing intentionally stays neutral.', external:true },
   { slug:'school-management-system', title:'School Management System', category:'Education Technology / Planned Client Solution', status:'Planned Solution', filter:'Education', href:'/contact', planned:true, description:'A proposed school platform. Requirements and final scope are to be defined with the client; possible areas are proposals, not implemented features.', detail:'A planned client solution. Requirements are to be finalized with the client. Possible areas for discussion include student and teacher records, attendance, examinations and timetables, fees, role-based dashboards, and parent/student communication. These are proposed capabilities, not implemented features.', },
 ];
+const teamMembers = [
+  {
+    name: 'Imran Khan',
+    role: 'Visionary, Founder & Investor',
+    subtitle: 'Current job: Admin Finance Manager',
+    description: 'Guides the vision and investment behind HighFly AI.',
+    image: '/team/imran-khan.jpeg',
+    links: [
+      { label: 'Email', href: 'mailto:anfalimran61@gmail.com' },
+      { label: 'WhatsApp', href: 'https://wa.me/923319024014', external: true },
+    ],
+  },
+  {
+    name: 'Muhammad Faizan Sajid',
+    role: 'Developer · Backend, DevOps & AI',
+    description: 'Builds backend systems, DevOps workflows and AI features.',
+    image: '/team/faizan-sajid.jpeg',
+    links: [
+      { label: 'Email', href: 'mailto:m.faizansajid102418@gmail.com' },
+      { label: 'WhatsApp', href: 'https://wa.me/923091995456', external: true },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/faizan102418/', external: true },
+      { label: 'Website', href: 'https://faizan-sajid.vercel.app/', external: true },
+      { label: 'GitHub', href: 'https://github.com/faizan102418', external: true },
+    ],
+  },
+  {
+    name: 'Muhammad Shayan Sajid',
+    role: 'E-commerce Scaling Consultant & Digital Marketing Strategist',
+    description: 'Supports e-commerce growth and digital marketing strategy.',
+    image: '/team/shayan-sajid.jpeg',
+    links: [
+      { label: 'Email', href: 'mailto:mshayansajid1122@gmail.com' },
+      { label: 'WhatsApp', href: 'https://wa.me/923265790051', external: true },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shanankhan/', external: true },
+      { label: 'Portfolio', href: 'https://shanan-portfolio.vercel.app/', external: true },
+    ],
+  },
+  {
+    name: 'Salman Sajid',
+    role: 'Intern · Digital Marketing & Video Editing',
+    description: 'Supports digital marketing and video editing.',
+    initials: 'SS',
+    links: [],
+  },
+];
 const serviceDetails = [
   ['Custom Web Application Development','Disconnected tools and manual work can make everyday processes harder to manage.','Purpose-built web applications, management systems and dashboards can bring key workflows into one considered experience.','Internal portals, business applications, customer-facing tools and operational dashboards.','A solution shaped around real workflows can improve clarity, reduce duplicate effort and make information easier to use.','We clarify users and requirements, agree a practical scope, then design, build, test and refine with feedback.'],
   ['AI Application Development and Integration','AI can be difficult to apply when a clear use case and fit with existing work are not established.','We explore and develop AI-powered applications or integrate suitable AI capabilities into a broader workflow.','Natural-language interfaces, AI assistants, document and information workflows.','A well-scoped application may make selected information or tasks easier to access and work with.','We identify the use case, data boundaries and integration needs, then prototype, evaluate and refine.'],
@@ -66,7 +111,14 @@ function Header() {
 }
 function Footer() {
   return <footer className="site-footer"><div className="container"><div className="footer-main">
-    <div className="footer-brand"><Link href="/" aria-label="HighFly AI home"><img className="footer-logo" src="/highfly-ai-logo.png" alt="HighFly AI" /></Link><p>Practical software, AI applications and automation for the work businesses do every day.</p></div>
+    <div className="footer-brand">
+      <Link href="/" aria-label="HighFly AI home"><img className="footer-logo" src="/highfly-ai-logo.png" alt="HighFly AI" /></Link>
+      <p>Practical software, AI applications and automation for the work businesses do every day.</p>
+      <div className="footer-contact-links">
+        <a href="mailto:m.faizansajid102418@gmail.com">m.faizansajid102418@gmail.com</a>
+        <a href="tel:+923091995456">+92 309 1995456</a>
+      </div>
+    </div>
     <div className="footer-column"><h3>Explore</h3>{navItems.slice(1).map(([n,p])=><Link key={p} href={p}>{n}</Link>)}<Link href="/privacy">Privacy Policy</Link></div>
     <div className="footer-column"><h3>Capabilities</h3><Link href="/services">Custom software</Link><Link href="/services">AI applications</Link><Link href="/services">Business automation</Link><Link href="/services">Management systems</Link></div>
     <div className="footer-column"><h3>Selected work</h3>{projects.slice(0,4).map(p=><Link key={p.slug} href={`/work/${p.slug}`}>{p.title}</Link>)}</div>
@@ -96,10 +148,97 @@ function HomePage() {
  </main></Layout>;
 }
 function CallToAction(){return <section className="cta-band"><div className="container cta-inner"><div><Eyebrow>Start with the challenge</Eyebrow><h2>Have an Idea? Let’s Build It.</h2><p>Tell us what you’re trying to solve. We’ll discuss your requirements and explore a suitable digital solution.</p></div><div className="cta-actions"><Link className="button button-primary" href="/contact">Discuss Your Project <ArrowRight/></Link><Link className="button button-ghost" href="/services">Explore Our Services</Link></div></div></section>}
+function TeamSection() {
+  return (
+    <section className="team-section" aria-labelledby="team-heading">
+      <div className="container">
+        <div className="team-heading">
+          <Eyebrow>Our team</Eyebrow>
+          <h2 id="team-heading">The people behind HighFly AI</h2>
+          <p>Leadership, software development and digital growth capabilities, working together to build practical solutions.</p>
+        </div>
+        <div className="team-grid">
+          {teamMembers.map((member) => (
+            <article className="team-card" key={member.name}>
+              <div className="team-photo">
+                {member.image ? (
+                  <img src={member.image} alt={member.name} />
+                ) : (
+                  <div className="team-avatar" role="img" aria-label={`Initials for ${member.name}; portrait not supplied`}>
+                    <span>{member.initials}</span>
+                    <small>Portrait not supplied</small>
+                  </div>
+                )}
+              </div>
+              <div className="team-card-content">
+                <h3>{member.name}</h3>
+                <p className="team-role">{member.role}</p>
+                {member.subtitle && <p className="team-subtitle">{member.subtitle}</p>}
+                <p className="team-bio">{member.description}</p>
+                {member.links.length > 0 && (
+                  <div className="team-links" aria-label={`${member.name} contact and profile links`}>
+                    {member.links.map((link) => (
+                      <a key={link.label} href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 function ServicesPage(){return <Layout><Meta title="Services | HighFly AI" description="Explore custom web applications, AI development, RAG assistants, automation, management systems, e-commerce, websites and digital experience services from HighFly AI."/><main><PageHero label="Services" title="Technology for the way your business works." description="A practical range of software, AI and digital services. Scope, timelines, pricing, integrations and maintenance depend on the requirements of each project."/><section className="services-detail"><div className="container"><div className="service-detail-grid">{serviceDetails.map((s,i)=>{const Icon=[Code2,Bot,MessageSquareText,Workflow,Hotel,GraduationCap,ShoppingBasket,Globe2,PenTool,Sparkles][i];return <article className="service-detail-card" key={s[0]}><div className="icon-box"><Icon/></div><div><h2>{s[0]}</h2><h4>The challenge</h4><p>{s[1]}</p><h4>How we can help</h4><p>{s[2]}</p><h4>Typical use cases</h4><p>{s[3]}</p><h4>Potential benefits</h4><p>{s[4]}</p><h4>Engagement process</h4><p>{s[5]}</p><Link className="text-link" href="/contact">Discuss this service <ArrowRight/></Link></div></article>})}</div><div className="scope-note"><strong>Project-specific scope:</strong> Any listed use case is a possibility, not a guaranteed deliverable. Requirements, estimates, integrations and ongoing support are confirmed for each engagement.</div></div></section><CallToAction/></main></Layout>}
 function WorkPage(){const [filter,setFilter]=useState('All');const filters=['All','AI','Hospitality','Education','Retail'];const filtered=projects.filter(p=>filter==='All'||p.filter===filter);return <Layout><Meta title="Our Work | HighFly AI" description="Browse HighFly AI software and AI project repositories, prototypes and planned solutions, with clear and accurate project status."/><main><PageHero label="Our work" title="Digital solutions, built for real workflows." description="A selection of software repositories, an application prototype and a planned client solution. Project statuses are stated plainly; illustrative visuals are not product screenshots."/><section className="work-page"><div className="container"><div className="filter-row" role="group" aria-label="Filter projects by category">{filters.map(f=><button className="filter-button" type="button" key={f} aria-pressed={filter===f} onClick={()=>setFilter(f)} data-testid={`filter-${f.toLowerCase()}`}>{f}</button>)}</div><div className="work-grid">{filtered.map((p,i)=><ProjectCard project={p} index={i} key={p.slug}/>)}</div><div className="scope-note">All visuals are clearly marked illustrative and are not screenshots or evidence of deployed software. School Management System is a planned solution and is not counted as completed work.</div></div></section></main></Layout>}
 function ProjectDetailPage(){const params=useParams<{slug:string}>();const project=projects.find(p=>p.slug===params.slug);if(!project)return <NotFoundPage/>;const repoLabel=project.external?'Open Google AI Studio prototype':'View project repository';return <Layout><Meta title={`${project.title} | HighFly AI Work`} description={project.description}/><main className="detail-page"><div className="container"><Link href="/work" className="back-link"><ArrowLeft/> Back to selected work</Link><div className="detail-layout"><div><Eyebrow>{project.category}</Eyebrow><h1>{project.title}</h1><span className={`status ${project.planned?'planned':''}`}>{project.status}</span><p className="lead">{project.detail}</p><div className="detail-notice">{project.planned?'Planned solution — requirements to be finalized with the client. The feature areas described are proposed only.':project.status==='In development'?'In development — this is a project foundation, not a live deployment.':project.status==='Academic project / prototype'?'Academic project/prototype — no privacy, security or accuracy guarantees are implied.':project.status==='Repository project'?'Repository project — not presented as a verified commercial deployment.':'Prototype — functionality has not been verified; the description remains neutral.'}</div><ProjectArtwork index={3}/></div><aside className="detail-panel"><h2>Project information</h2><p><strong>Category</strong><br/>{project.category}</p><p><strong>Status</strong><br/>{project.status}</p>{project.planned?<><p>Possible capabilities remain subject to requirements and scope discussions.</p><Link href="/contact" className="button button-primary">Discuss a similar solution <ArrowRight/></Link></>:<a className="button button-primary" href={project.href} target="_blank" rel="noopener noreferrer">{repoLabel} <ArrowDownRight/></a>}</aside></div></div></main></Layout>}
-function AboutPage(){return <Layout><Meta title="About HighFly AI | Practical Technology" description="Learn about HighFly AI's mission, capabilities and practical approach to building custom software, AI applications and automation around real business needs."/><main><PageHero label="About HighFly AI" title="Building Useful Technology for a Smarter Future" description="HighFly AI focuses on developing practical digital solutions that help organizations modernize workflows, improve access to information, and make better use of technology."/><section className="about-section"><div className="container"><div className="about-lead"><div><Eyebrow>Purpose & direction</Eyebrow><h2>Useful technology should start with a real need.</h2><p>Our work spans custom software, AI-powered applications, business automation, and industry-specific systems. We focus on understanding the people, processes and constraints around each challenge before choosing an approach.</p><p>Our mission is to make useful technology more accessible by building thoughtful software and AI solutions around real business needs.</p><p>Our vision is to help businesses and institutions operate more effectively through dependable digital products and intelligent automation.</p></div><aside className="mission-box"><span>Development philosophy</span><p>Start with the work. Choose technology that serves it. Build with room to learn.</p></aside></div><div className="about-cards">{[['Our approach','We listen to the context, clarify the problem and define requirements before settling on a technical solution.'],['Core capabilities','Custom applications, practical AI experiences, RAG systems, workflow automation and digital product design.'],['Industries of interest','Hospitality, education, retail, healthcare operations and organizations with processes ready to improve.'],['Build thoughtfully','Scope and delivery are shaped by project needs. We aim for maintainable systems and transparent trade-offs.'],['Collaborate openly','We plan milestones, share progress and use feedback to refine the work as requirements evolve.'],['No one-size-fits-all','The right solution depends on users, existing systems, privacy obligations, budget and priorities.']].map(x=><article className="about-card" key={x[0]}><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></div></section><CallToAction/></main></Layout>}
+function AboutPage() {
+  return (
+    <Layout>
+      <Meta title="About HighFly AI | Practical Technology" description="Learn about HighFly AI's mission, capabilities, team and practical approach to building custom software, AI applications and automation around real business needs." />
+      <main>
+        <PageHero label="About HighFly AI" title="Building Useful Technology for a Smarter Future" description="HighFly AI focuses on developing practical digital solutions that help organizations modernize workflows, improve access to information, and make better use of technology." />
+        <section className="about-section">
+          <div className="container">
+            <div className="about-lead">
+              <div>
+                <Eyebrow>Purpose & direction</Eyebrow>
+                <h2>Useful technology should start with a real need.</h2>
+                <p>Our work spans custom software, AI-powered applications, business automation, and industry-specific systems. We focus on understanding the people, processes and constraints around each challenge before choosing an approach.</p>
+                <p>Our mission is to make useful technology more accessible by building thoughtful software and AI solutions around real business needs.</p>
+                <p>Our vision is to help businesses and institutions operate more effectively through dependable digital products and intelligent automation.</p>
+              </div>
+              <aside className="mission-box">
+                <span>Development philosophy</span>
+                <p>Start with the work. Choose technology that serves it. Build with room to learn.</p>
+              </aside>
+            </div>
+            <div className="about-cards">
+              {[
+                ['Our approach', 'We listen to the context, clarify the problem and define requirements before settling on a technical solution.'],
+                ['Core capabilities', 'Custom applications, practical AI experiences, RAG systems, workflow automation and digital product design.'],
+                ['Industries of interest', 'Hospitality, education, retail, healthcare operations and organizations with processes ready to improve.'],
+                ['Build thoughtfully', 'Scope and delivery are shaped by project needs. We aim for maintainable systems and transparent trade-offs.'],
+                ['Collaborate openly', 'We plan milestones, share progress and use feedback to refine the work as requirements evolve.'],
+                ['No one-size-fits-all', 'The right solution depends on users, existing systems, privacy obligations, budget and priorities.'],
+              ].map(([title, text]) => (
+                <article className="about-card" key={title}>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <TeamSection />
+        <CallToAction />
+      </main>
+    </Layout>
+  );
+}
 type FormValues={name:string;email:string;description:string;service:string;company:string;phone:string;budget:string;timeline:string;notes:string;consent:boolean};
 function ContactPage(){const [values,setValues]=useState<FormValues>({name:'',email:'',description:'',service:'',company:'',phone:'',budget:'',timeline:'',notes:'',consent:false});const [errors,setErrors]=useState<Record<string,string>>({});const [loading,setLoading]=useState(false);const [feedback,setFeedback]=useState('');const endpoint=import.meta.env.VITE_CONTACT_ENDPOINT as string|undefined;const update=(key:keyof FormValues,value:string|boolean)=>setValues(v=>({...v,[key]:value}));
  const submit=async(e:FormEvent<HTMLFormElement>)=>{e.preventDefault();setFeedback('');const next:Record<string,string>={};if(!values.name.trim())next.name='Please enter your full name.';if(!values.email.trim())next.email='Please enter your email address.';else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))next.email='Enter a valid email address.';if(!values.description.trim())next.description='Please describe your project or business challenge.';if(!values.service)next.service='Choose the type of service you need.';setErrors(next);if(Object.keys(next).length)return;
@@ -121,9 +260,14 @@ function ContactPage(){const [values,setValues]=useState<FormValues>({name:'',em
         <strong>{endpoint?'Contact endpoint configured — delivery must be tested before launch.':'Form delivery is not configured.'}</strong>
         {endpoint?'The form posts to the configured endpoint. Confirm the endpoint’s security, privacy, retention and delivery behavior before collecting enquiries.':'This website currently has no email provider or backend endpoint. Submissions are not transmitted until an integration is configured. Do not include sensitive information. See the README launch checklist before publishing.'}
        </div>
-       <section className="contact-details-placeholder" aria-labelledby="contact-details-heading">
-        <h3 id="contact-details-heading">Contact details</h3>
-        <p>No verified email, phone number, office address or social profile has been supplied yet. Confirmed details can be added here before launch.</p>
+        <section className="contact-details-placeholder" aria-labelledby="contact-details-heading">
+         <h3 id="contact-details-heading">Company contact</h3>
+         <p>Reach HighFly AI by email, phone or WhatsApp.</p>
+         <div className="company-contact-methods">
+          <a href="mailto:m.faizansajid102418@gmail.com"><span>Email</span>m.faizansajid102418@gmail.com</a>
+          <a href="tel:+923091995456"><span>Phone</span>+92 309 1995456</a>
+          <a href="https://wa.me/923091995456" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span>Message HighFly AI</a>
+         </div>
        </section>
       </div>
       <form className="contact-form" onSubmit={submit} noValidate>
@@ -176,7 +320,7 @@ function ContactPage(){const [values,setValues]=useState<FormValues>({name:'',em
   </Layout>
  );
 }
-function PrivacyPage(){const endpoint=import.meta.env.VITE_CONTACT_ENDPOINT as string|undefined;return <Layout><Meta title="Privacy Policy | HighFly AI" description="Privacy information for the HighFly AI website, including the current status of contact form transmission and handling of information entered by visitors."/><main><PageHero label="Privacy" title="Privacy Policy" description="A straightforward explanation of this website’s current information practices."/><article className="container privacy-content"><p><strong>Review status: confirm and date this policy before launch.</strong></p><h2>Contact form</h2><p>{endpoint?'A contact endpoint is configured for this build. The endpoint operator, email provider, purpose, recipients, retention period and applicable data safeguards must be confirmed and documented before collecting enquiries.':'The contact form is present for project enquiries, but no email provider or backend delivery endpoint is configured at this time. Submissions are not transmitted. Visitors should not enter sensitive personal, financial, student, health or confidential business information.'}</p><h2>Information entered</h2><p>{endpoint?'When a delivery endpoint is configured, information entered in the form is sent to that endpoint when the visitor submits. Confirm actual processing, security, storage, retention and deletion practices with the endpoint operator before enabling it for visitors.':'When the form is not configured, information typed into it remains in the browser and is not sent by this website. If a secure server-side endpoint is configured, update this policy to identify what information it receives, the purpose, retention period, recipients and relevant contact method before accepting submissions.'}</p><h2>Cookies and tracking</h2><p>This implementation does not add analytics, advertising trackers, or non-essential cookies.</p><h2>Third-party links</h2><p>Project links may lead to third-party websites, including GitHub and Google AI Studio. Those services have their own privacy practices and terms.</p><h2>Questions and updates</h2><p>No verified company privacy contact details have been supplied. Before launch, add a verified contact method and review this policy for the company’s actual practices and applicable legal requirements.</p></article></main></Layout>}
+function PrivacyPage(){const endpoint=import.meta.env.VITE_CONTACT_ENDPOINT as string|undefined;return <Layout><Meta title="Privacy Policy | HighFly AI" description="Privacy information for the HighFly AI website, including the current status of contact form transmission and handling of information entered by visitors."/><main><PageHero label="Privacy" title="Privacy Policy" description="A straightforward explanation of this website’s current information practices."/><article className="container privacy-content"><p><strong>Review status: confirm and date this policy before launch.</strong></p><h2>Contact form</h2><p>{endpoint?'A contact endpoint is configured for this build. The endpoint operator, email provider, purpose, recipients, retention period and applicable data safeguards must be confirmed and documented before collecting enquiries.':'The contact form is present for project enquiries, but no email provider or backend delivery endpoint is configured at this time. Submissions are not transmitted. Visitors should not enter sensitive personal, financial, student, health or confidential business information.'}</p><h2>Information entered</h2><p>{endpoint?'When a delivery endpoint is configured, information entered in the form is sent to that endpoint when the visitor submits. Confirm actual processing, security, storage, retention and deletion practices with the endpoint operator before enabling it for visitors.':'When the form is not configured, information typed into it remains in the browser and is not sent by this website. If a secure server-side endpoint is configured, update this policy to identify what information it receives, the purpose, retention period, recipients and relevant contact method before accepting submissions.'}</p><h2>Cookies and tracking</h2><p>This implementation does not add analytics, advertising trackers, or non-essential cookies.</p><h2>Third-party links</h2><p>Project links may lead to third-party websites, including GitHub and Google AI Studio. Those services have their own privacy practices and terms.</p><h2>Questions and updates</h2><p>For privacy-related questions, email <a href="mailto:m.faizansajid102418@gmail.com">m.faizansajid102418@gmail.com</a>. Review this policy against HighFly AI’s actual data handling and applicable requirements before launch.</p></article></main></Layout>}
 function NotFoundPage(){return <Layout><Meta title="Page Not Found | HighFly AI" description="The page could not be found. Return to HighFly AI or explore services and selected work."/><main className="not-found container"><Eyebrow>404 · Not found</Eyebrow><h1>That page isn’t here.</h1><p>The address may have changed or the page may no longer be available.</p><Link href="/" className="button button-primary">Back to home <ArrowRight/></Link></main></Layout>}
 function Router(){return <Switch><Route path="/" component={HomePage}/><Route path="/services" component={ServicesPage}/><Route path="/work" component={WorkPage}/><Route path="/work/:slug" component={ProjectDetailPage}/><Route path="/about" component={AboutPage}/><Route path="/contact" component={ContactPage}/><Route path="/privacy" component={PrivacyPage}/><Route component={NotFoundPage}/></Switch>}
 function App(){return <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')}><Router/></WouterRouter>}

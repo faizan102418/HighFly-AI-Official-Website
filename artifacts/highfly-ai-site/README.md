@@ -23,13 +23,13 @@ The Replit-managed workflow supplies the required `PORT` and `BASE_PATH` values 
 
 ## Contact form integration
 
-**The form does not transmit submissions until delivery is configured.** There is no email provider, verified company email, or backend endpoint configured. Without configuration, the frontend validates the fields and displays a clear notice that nothing was sent; it does not display a false success state.
+**The form does not transmit submissions until delivery is configured.** HighFly AI's contact email and phone are displayed as direct contact options, but there is not yet an email-sending integration or backend endpoint. Until configured, the frontend validates fields and clearly reports that nothing was sent.
 
 To connect delivery:
 
-1. Implement and deploy a secure server-side endpoint (for example, a serverless function) that accepts a validated JSON `POST`, sanitizes and rate-limits input, applies suitable spam prevention, and sends the enquiry using a provider configured only on the server.
+1. Connect the Replit-managed Resend integration, then implement a secure server-side endpoint that validates and sanitizes the JSON `POST`, applies rate limits and suitable spam prevention, and sends the enquiry to `m.faizansajid102418@gmail.com`.
 2. Return a successful HTTP status only after the endpoint has accepted the enquiry. Return a non-success status for errors. Configure CORS/CSRF protections as appropriate for the deployment.
-3. Set the frontend environment variable `VITE_CONTACT_ENDPOINT` to the endpoint URL in the deployment environment. Do not put provider API keys or private credentials in `VITE_*` variables or frontend code.
+3. Set the frontend environment variable `VITE_CONTACT_ENDPOINT` to the endpoint URL. Keep provider credentials in the Replit integration or server-side Secrets; never put keys in `VITE_*` variables or browser code. Verify the sender/domain with Resend before production delivery.
 4. Test delivery, failure, validation, privacy copy, spam controls and retention with the actual production configuration before publishing. Update the privacy policy to reflect the real data handling.
 
 The form sends the fields `name`, `email`, `description`, `service`, `company`, `phone`, `budget`, `timeline`, `notes`, and `consent` as JSON with `credentials: "include"`. Do not store more personal information than needed.
@@ -44,13 +44,13 @@ Each route sets its own title, description and Open Graph title/description in t
 - [ ] Add the correct absolute URLs to `public/sitemap.xml`; validate it and submit it after domain confirmation.
 - [ ] Re-check route-specific metadata and social previews on the production host.
 - [ ] Confirm the logo file and approved favicon presentation.
-- [ ] Supply and verify an official contact method before adding it to the site. No email address, phone number, office address, social profiles or business registration information has been invented here.
-- [ ] Configure the secure contact-form delivery endpoint and `VITE_CONTACT_ENDPOINT`; test real delivery and failure paths. Until then, the form does not transmit submissions.
+- [ ] Verify the supplied company email and phone, team roles, personal profile links and photo approvals before launch.
+- [ ] Connect Resend, verify an allowed sender/domain, configure the secure contact-form endpoint and `VITE_CONTACT_ENDPOINT`, then test real delivery and failure paths. Until then, the form does not transmit submissions.
 - [ ] Review the Privacy Policy against actual data flows, legal obligations, endpoint retention and spam prevention before enabling submissions.
 - [ ] Confirm project status and descriptions with the maintainers. HighFly Hospitality is in development; the Centralized Student Information System is an academic prototype; Baba Store is a repository project; AI Studio functionality is unverified; the School Management System is planned only.
 - [ ] Replace illustrative portfolio artwork only with authorized, genuine project visuals. Current artwork is explicitly labeled illustrative and is not evidence of working software.
 - [ ] Check keyboard navigation, mobile menu, reduced-motion behavior, form validation, external links and direct route refreshes on the selected host.
-- [ ] Run `npm run typecheck` and `npm run build` before deployment.
+- [ ] Run `pnpm --filter @workspace/highfly-ai-site run typecheck` and `pnpm --filter @workspace/highfly-ai-site run build` before deployment.
 
 ## Content integrity
 
