@@ -23,16 +23,16 @@ The Replit-managed workflow supplies the required `PORT` and `BASE_PATH` values 
 
 ## Contact form integration
 
-**The form does not transmit submissions until delivery is configured.** HighFly AI's contact email and phone are displayed as direct contact options, but there is not yet an email-sending integration or backend endpoint. Until configured, the frontend validates fields and clearly reports that nothing was sent.
+**The form does not transmit submissions until delivery is enabled.** The API server now has a validated, rate-limited `/api/contact` route that sends inquiries through the connected Replit Resend integration to `m.faizansajid102418@gmail.com`. The frontend remains disabled because the connected Resend account currently has no verified sending domain.
 
-To connect delivery:
+To enable delivery:
 
-1. Connect the Replit-managed Resend integration, then implement a secure server-side endpoint that validates and sanitizes the JSON `POST`, applies rate limits and suitable spam prevention, and sends the enquiry to `m.faizansajid102418@gmail.com`.
-2. Return a successful HTTP status only after the endpoint has accepted the enquiry. Return a non-success status for errors. Configure CORS/CSRF protections as appropriate for the deployment.
-3. Set the frontend environment variable `VITE_CONTACT_ENDPOINT` to the endpoint URL. Keep provider credentials in the Replit integration or server-side Secrets; never put keys in `VITE_*` variables or browser code. Verify the sender/domain with Resend before production delivery.
-4. Test delivery, failure, validation, privacy copy, spam controls and retention with the actual production configuration before publishing. Update the privacy policy to reflect the real data handling.
+1. Verify a sending domain in Resend and choose a sender email at that domain. A personal Gmail address cannot be used as the sender.
+2. Set server environment variable `RESEND_FROM_EMAIL` to that verified sender address. The Resend key stays in the Replit-managed integration; do not add a key to source code or `VITE_*` variables.
+3. Set the website build environment variable `VITE_CONTACT_ENDPOINT=/api/contact`. Do this only after the server sender is configured. Without it, the form displays that submissions are not sent.
+4. Test successful delivery, provider failures, validation, consent, spam controls and the privacy copy with the actual production configuration before publishing. Review retention and privacy wording against the real email account settings.
 
-The form sends the fields `name`, `email`, `description`, `service`, `company`, `phone`, `budget`, `timeline`, `notes`, and `consent` as JSON with `credentials: "include"`. Do not store more personal information than needed.
+The form sends `name`, `email`, `description`, `service`, `company`, `phone`, `budget`, `timeline`, `notes`, `consent` and a hidden spam-check field as JSON. The endpoint validates field lengths, requires consent, rejects filled honeypots, and limits each IP address to five submissions per 15 minutes. It does not store inquiry contents in a separate database.
 
 ## SEO and domain
 
@@ -45,7 +45,7 @@ Each route sets its own title, description and Open Graph title/description in t
 - [ ] Re-check route-specific metadata and social previews on the production host.
 - [ ] Confirm the logo file and approved favicon presentation.
 - [ ] Verify the supplied company email and phone, team roles, personal profile links and photo approvals before launch.
-- [ ] Connect Resend, verify an allowed sender/domain, configure the secure contact-form endpoint and `VITE_CONTACT_ENDPOINT`, then test real delivery and failure paths. Until then, the form does not transmit submissions.
+- [ ] Verify a Resend sending domain, set `RESEND_FROM_EMAIL` and `VITE_CONTACT_ENDPOINT=/api/contact`, then test real delivery and failure paths. Until then, the form does not transmit submissions.
 - [ ] Review the Privacy Policy against actual data flows, legal obligations, endpoint retention and spam prevention before enabling submissions.
 - [ ] Confirm project status and descriptions with the maintainers. HighFly Hospitality is in development; the Centralized Student Information System is an academic prototype; Baba Store is a repository project; AI Studio functionality is unverified; the School Management System is planned only.
 - [ ] Replace illustrative portfolio artwork only with authorized, genuine project visuals. Current artwork is explicitly labeled illustrative and is not evidence of working software.

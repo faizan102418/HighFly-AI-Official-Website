@@ -41,6 +41,15 @@ router.post("/contact", inquiryRateLimit, async (req, res): Promise<void> => {
   }
 
   const inquiry = parsed.data;
+  if (
+    [inquiry.name, inquiry.email, inquiry.description, inquiry.service].some(
+      (value) => !value.trim(),
+    )
+  ) {
+    res.status(400).json(errorBody("Check the required fields and try again."));
+    return;
+  }
+
   if (inquiry.consent !== true) {
     res.status(400).json(
       errorBody("Please consent to sending your inquiry before submitting."),
@@ -102,8 +111,7 @@ router.post("/contact", inquiryRateLimit, async (req, res): Promise<void> => {
       );
       res.status(502).json(
         errorBody(
-          error:
-            "We could not deliver your inquiry right now. Please contact HighFly AI directly.",
+          "We could not deliver your inquiry right now. Please contact HighFly AI directly.",
         ),
       );
       return;
